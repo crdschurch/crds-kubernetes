@@ -5,7 +5,7 @@ metadata:
   namespace: api
   annotations:
     ingress.kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
@@ -19,43 +19,43 @@ spec:
   - host: $API_HOST_NAME
     http:
       paths:
-      - path: /golocal
+      - path: /golocal(/|$)(.*)
         backend:
           serviceName: crds-go-local-api-service
           servicePort: 80
-      - path: /fred
+      - path: /fred(/|$)(.*)
         backend:
           serviceName: fred-service
           servicePort: 80
-      - path: /attendance
+      - path: /attendance(/|$)(.*)
         backend:
           serviceName: attendance-service
           servicePort: 80
-      - path: /finance
+      - path: /finance(/|$)(.*)
         backend:
           serviceName: crds-finance-service
           servicePort: 80
-      - path: /event-checkin
+      - path: /event-checkin(/|$)(.*)
         backend:
           serviceName: crds-event-checkin-service
           servicePort: 80
-      - path: /auth
+      - path: /auth(/|$)(.*)
         backend:
           serviceName: crds-auth-service
           servicePort: 80
-      - path: /serve
+      - path: /serve(/|$)(.*)
         backend:
           serviceName: crds-serve-service
           servicePort: 80
-      - path: /search-index
+      - path: /search-index(/|$)(.*)
         backend:
           serviceName: crds-search-index-service
           servicePort: 80
-      - path: /video-service
+      - path: /video-service(/|$)(.*)
         backend:
           serviceName: crds-video-service
           servicePort: 80
-      - path: /graphql-gateway
+      - path: /graphql-gateway(/|$)(.*)
         backend:
           serviceName: crds-graphql-gateway
           servicePort: 80

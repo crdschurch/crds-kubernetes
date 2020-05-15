@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: dashboard-ingress
-        image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.31.1
+        image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
         imagePullPolicy: Always
         env:
         - name: POD_NAME

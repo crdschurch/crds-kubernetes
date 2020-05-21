@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: api-ingress
   namespace: api
+  }
 spec:
   replicas: 2
   strategy:
@@ -53,6 +54,7 @@ spec:
           timeoutSeconds: 1
         args:
         - /nginx-ingress-controller
+        - --configmap=$(POD_NAMESPACE)/crds-ingress-nginx-config-cipher-testing
         - --default-ssl-certificate=api/crossroads-ssl
         - --annotations-prefix=nginx.ingress.kubernetes.io
         - --ingress-class=nginx

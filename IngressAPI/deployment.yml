@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: api-ingress
   namespace: api
-  }
 spec:
   replicas: 2
   strategy:

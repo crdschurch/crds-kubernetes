@@ -56,7 +56,7 @@ spec:
           timeoutSeconds: 1
         args:
         - /nginx-ingress-controller
-        - --configmap=$(POD_NAMESPACE)/crds-ingress-nginx-config-cipher-testing
+        - --configmap=$(POD_NAMESPACE)/crds-ingress-nginx-config-cipher
         - --default-ssl-certificate=api/crossroads-ssl
         - --annotations-prefix=nginx.ingress.kubernetes.io
         - --ingress-class=nginx

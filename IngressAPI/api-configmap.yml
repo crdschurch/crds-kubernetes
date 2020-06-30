@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: crds-ingress-nginx-config-cipher-testing
+  name: crds-ingress-nginx-config-cipher
   namespace: api
 data:
   proxy-connect-timeout: "300"

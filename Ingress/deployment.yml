@@ -1,9 +1,12 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: crds-ingress
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: crds-ingress
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,7 +19,7 @@ spec:
     spec:
       containers:
       - name: crds-ingress
-        image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
+        image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.31.1
         imagePullPolicy: Always
         resources:
           limits:

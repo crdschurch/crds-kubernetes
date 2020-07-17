@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dashboard-ingress
   namespace: kube-system
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: dashboard-ingress
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,7 +20,7 @@ spec:
     spec:
       containers:
       - name: dashboard-ingress
-        image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.20.0
+        image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.31.1
         imagePullPolicy: Always
         env:
         - name: POD_NAME

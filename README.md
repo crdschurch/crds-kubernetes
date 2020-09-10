@@ -20,3 +20,15 @@ This namespace contains back end applications and the routing to those applicati
 ### kube-system
 
 This namespace is built into the kubernetes deployment and contains some system applications. It also contains an ingress that exposes the kubernetes dashboard.
+
+
+### Updating SSL Certificates
+
+To update SSL Certificates:
+SSH into the Linux Build VM
+
+Update the `chain.crt`, `tls.crt`, `tls.key` files under /data/teamcity/ssl - `scp file.ext user@ci.crossroads.net:/data/teamcity/ssl`
+
+Redeploy the Kubernetes project in TeamCity
+
+Delete and restart the api-ingress pods

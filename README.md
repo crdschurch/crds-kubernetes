@@ -23,6 +23,7 @@ This namespace is built into the kubernetes deployment and contains some system 
 
 
 ### Updating SSL Certificates
+
 To update SSL Certificates:
 SSH into the Linux Build VM
 Update the `chain.crt`, `tls.crt`, `tls.key` files under /data/teamcity/ssl - `scp file.ext user@ci.crossroads.net:/data/teamcity/ssl`

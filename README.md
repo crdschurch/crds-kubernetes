@@ -37,6 +37,6 @@ Delete and restart the api-ingress pods
 ### Updating SSL CERTS post 1/1/21 ###
 The CertManager deployment downloads a cert manager from github and adds new k8s types. Then applies all of the files needed to automates the cert renewal process through letsencrypt. The cert information is stored on a volume with in the cluster.
 
- The api-ssl-issuer.yml file is applied as a part of the crds-kubernetes deployment.
+The api-ssl-issuer.yml file is applied as a part of the crds-kubernetes deployment.
 
-The automation was added to all the k8s environments, but currently is only creating certs for the api ingress.
+The automation was added to all the k8s environments, but currently is only creating certs for the api ingress. [Extra Documentation](https://docs.google.com/document/d/1xe6fGtLWx_ZJAU6UTK7QMf6343HRHr3f-YuppC3rGrM/edit?usp=sharing)

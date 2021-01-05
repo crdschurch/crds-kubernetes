@@ -23,7 +23,7 @@ This namespace is built into the kubernetes deployment and contains some system 
 
 
 ### Updating SSL Certificates
-### This was the process prior to 1/1/21
+This was the process to update certs prior to automation added in Jan 21. The current certs stored in this location expire Oct 2021.
 
 To update SSL Certificates:
 SSH into the Linux Build VM
@@ -34,7 +34,7 @@ Redeploy the Kubernetes project in TeamCity
 
 Delete and restart the api-ingress pods
 
-### Updating SSL CERTS post 1/1/21
+### Updating SSL CERTS post 1/1/21 ###
 The CertManager deployment downloads a cert manager from github and adds new k8s types. Then applies all of the files needed to automates the cert renewal process through letsencrypt. The cert information is stored on a volume with in the cluster.
 
  The api-ssl-issuer.yml file is applied as a part of the crds-kubernetes deployment.

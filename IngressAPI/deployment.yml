@@ -18,6 +18,7 @@ spec:
       labels:
         app: api-ingress
     spec:
+      serviceAccountName: api-ingress-serviceaccount
       containers:
       - name: api-ingress
         image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.31.1

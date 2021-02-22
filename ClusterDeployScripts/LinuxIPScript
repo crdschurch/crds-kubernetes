@@ -1,0 +1,6 @@
+ipVal=$(az network public-ip show --resource-group "MC_$1_eastus" --name "$2" --query ipAddress -o tsv)
+echo $ipVal
+ipLen=$("echo ${#ipVal})
+if [ $ipLen -gt 1]; then
+curl -v --basic --user $4:$5 --request PUT https://ci.crossroads.net/app/rest/buildTypes/id:Infrastructure_KubernetesInfrastructure_Integration/parameters/$3 --data "$ipVal" --header "Content-Type: text/plain"
+fi

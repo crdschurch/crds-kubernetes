@@ -1,0 +1,2 @@
+# Purpose
+This directory creates two service accounts, one for each ingress service we create. It also creates a ClusterRole and a ClusterRoleBinding, that bindes the role to the new service accounts. 

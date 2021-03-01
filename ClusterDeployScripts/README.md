@@ -1,6 +1,6 @@
 # TeamCity scripts
 The ClusterDeployCommandLine file is a list of the AZ commands needed to set up the cluster from scratch.
-These commands will work fine if run multiple times and will not fail if the requested resources already exist. This script is run as the first build step in our Kubernetes Project on TeamCity, and is then inherited in each environments deplyment configuration. To modify the deployment change script at `<RootProject> > Infrastructure > Kubernetes > KubernetesInfrastructureDeploy`
+These commands will work fine if run multiple times and will not fail if the requested resources already exist. This script is run as the first build step in our Kubernetes Project on TeamCity, and is then inherited in each specific environments (Integration, Demo, Prod) deployment configuration. To modify the deployment, change the script at `<RootProject> > Infrastructure > Kubernetes > KubernetesInfrastructureDeploy`. Please update the script here in source control as changes are made in TeamCity.
 
 
 # az group create --location ""%LOCATION%"" --name "%env.KUBERNETES_RESOURCE_GROUP%" --subscription "%AZURE_SUBSCRIPTION%"
@@ -26,8 +26,5 @@ Pulls the new IP we just created and updates the proper environment variable wit
 Pulls the new IP we just created and updates the proper environment variable with that IP so that future steps can use it to deploy code. The password for the ServiceAccount is stored in 1Password
 
 
-
 # LinuxIPScript
 A file has been created in the root folder for the TeamCity user on the build agent called "update-az-ip-environment-var.sh" This file contains what you see in the LinuxIPScript.txt file. The point of this script is to query AZ for the given IP, then push that data back into TeamCity using the TC rest APIs. 
-
-

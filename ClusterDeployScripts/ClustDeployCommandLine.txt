@@ -1,0 +1,16 @@
+echo "Creating Resource Group"
+az group create --location %LOCATION% --name "%KUBERNETES_RESOURCE_GROUP%" --subscription "%AZURE_SUBSCRIPTION%"
+
+echo "Creating vnet"
+az network vnet create --name "%KUBERNETES_RESOURCE_GROUP%-vnet" --resource-group "%KUBERNETES_RESOURCE_GROUP%" --location "%LOCATION%" --address-prefixes "10.0.0.0/18"
+
+echo "Creating K8s cluster"
+az aks create --resource-group "%KUBERNETES_RESOURCE_GROUP%" --name "%KUBERNETES_SERVER_NAME%" --kubernetes-version "%env.K8S_VERSION%" --max-pods 50 --network-plugin "azure" --node-count 3 --node-vm-size "Standard_DS3_v2" --nodepool-name "agentpool" --location "%LOCATION%" --client-secret "%env.CLIENT_SECRET%" --service-principal "%env.CLIENT_ID%" --dns-service-ip "10.0.0.10"  --docker-bridge-address "172.17.0.1/16" --service-cidr "10.0.0.0/21" --admin-username "crdsadmin" --ssh-key-value "%env.SSH_PUBLICKEY%" 
+
+echo "Creating IP addresses"
+az network public-ip create --name "%env.CROSSROADS_IP_NAME%" --resource-group "MC_%KUBERNETES_RESOURCE_GROUP%_%KUBERNETES_SERVER_NAME%_%LOCATION%" --allocation-method "Static" --location "%LOCATION%" --sku "Standard"
+az network public-ip create --name %env.API_IP_NAME% --resource-group "MC_%KUBERNETES_RESOURCE_GROUP%_%KUBERNETES_SERVER_NAME%_%LOCATION%" --allocation-method "Static" --location "%LOCATION%" --sku "Standard"
+
+echo "Updating IP in ENVs"
+bash /home/teamcity/update-az-ip-environment-var.sh "%KUBERNETES_RESOURCE_GROUP%_%KUBERNETES_SERVER_NAME%_%LOCATION%" "%env.API_IP_NAME%" "env.API_IP" "%env.TEAMCITY_SERVICE_ACCOUNT%" "%env.TEAMCITY_SERVICE_PASSWORD%" "%env.environment%"
+bash /home/teamcity/update-az-ip-environment-var.sh "%KUBERNETES_RESOURCE_GROUP%_%KUBERNETES_SERVER_NAME%_%LOCATION%" "%env.CROSSROADS_IP_NAME%" "env.CROSSROADS_NET_IP" "%env.TEAMCITY_SERVICE_ACCOUNT%" "%env.TEAMCITY_SERVICE_PASSWORD%" "%env.environment%"

@@ -1,6 +1,9 @@
 echo "Creating Resource Group"
 az group create --location %LOCATION% --name "%KUBERNETES_RESOURCE_GROUP%" --subscription "%AZURE_SUBSCRIPTION%"
 
+echo "Pausing for resource group to be created"
+sleep 10
+
 echo "Creating vnet"
 az network vnet create --name "%KUBERNETES_RESOURCE_GROUP%-vnet" --resource-group "%KUBERNETES_RESOURCE_GROUP%" --location "%LOCATION%" --address-prefixes "10.0.0.0/18"
 

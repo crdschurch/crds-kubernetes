@@ -5,7 +5,7 @@ metadata:
   namespace: api
 spec:
   type: LoadBalancer
-  loadBalancerIP: 52.154.156.192
+  loadBalancerIP: $API_IP
   ports:
   - name: http
     port: 80

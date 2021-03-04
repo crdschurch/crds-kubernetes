@@ -1,1 +1,3 @@
-This sets up a daemonset to run the new relic agent on all the kubernetes nodes. A daemonset is a special kubernetes workload type that applies a pod to every node in the cluster.
+This sets up a daemonset to run the new relic agent on all the kubernetes nodes. A daemonset is a special kubernetes workload type that applies a pod to every node in the cluster. It also establishes the connection for logs to new relic, and the observation of the resources used.
+
+The old config files have been moved to the deleted files directory. This was done on 3/4/21 just incase the old configs are needed as a reference.

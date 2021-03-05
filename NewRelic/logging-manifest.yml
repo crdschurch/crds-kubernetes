@@ -37,7 +37,10 @@ spec:
             privileged: true
           env:
             - name: NRIA_LICENSE_KEY
-              value: ${NR_INSTALL_KEY}
+              valueFrom:
+                secretKeyRef:
+                  name: nri-bundle-newrelic-infrastructure-config
+                  key: license
             - name: "CLUSTER_NAME"
               value: ${KUBERNETES_SERVER_NAME}
             - name: "NRK8S_NODE_NAME"
@@ -119,7 +122,7 @@ metadata:
   name: nri-bundle-newrelic-logging-config
 type: Opaque
 data:
-  license: YThkZjY0ZTdhZWI0OTZiNzVjODJmNjk0OTcxMzBlYjQ0Mzk3YTc1NA==
+  license: ${ENCRYPTED_NR_LICENSE}
 
 ---
 # Source: nri-bundle/charts/newrelic-logging/templates/daemonset.yaml
@@ -163,7 +166,10 @@ spec:
             - name: SOURCE
               value: "kubernetes"
             - name: LICENSE_KEY
-              value: ${NR_INSTALL_KEY}
+              valueFrom:
+                secretKeyRef:
+                  name: nri-bundle-newrelic-logging-config
+                  key: license
             - name: CLUSTER_NAME
               value: ${KUBERNETES_SERVER_NAME}
             - name: LOG_LEVEL
@@ -466,7 +472,7 @@ spec:
         imagePullPolicy: "IfNotPresent"
         env:
         - name: clusterName
-          value: aks-crds-int
+          value: ${KUBERNETES_SERVER_NAME}
         volumeMounts:
         - name: tls-key-cert-pair
           mountPath: /etc/tls-key-cert-pair
